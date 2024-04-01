@@ -1,26 +1,33 @@
 #include <iostream>
 using namespace std;
-int main()
-{
-int maks, a, i = 1, lokasi;
-cout << "Masukkan panjang array: ";
-cin >> a;
-int array[a];
-cout << "Masukkan " << a << " angka\n";
-for (i = 0; i < a; i++)
-{
-cout << "Array ke-" << (i) << ": ";
-cin >> array[i];
+
+void insertion_sort(char arr[], int length) {
+    int i, j;
+    char tmp;
+    for (i = 1; i < length; i++) {
+        j = i;
+        while (j > 0 && arr[j - 1] < arr[j]) {
+            tmp = arr[j];
+            arr[j] = arr[j - 1];
+            arr[j - 1] = tmp;
+            j--;
+        } // end of while loop
+    } // end of for loop
 }
-maks = array[0];
-for (i = 0; i < a; i++)
-{
-if (array[i] > maks)
-{
-maks = array[i];
-lokasi = i;
+
+void print_array(char a[], int length) {
+    for (int i = 0; i < length; i++) {
+        cout << a[i] << "\t";
+    }
+    cout << endl;
 }
-}
-cout << "Nilai maksimum adalah " << maks << " berada di Array
-ke " << lokasi << endl;
+
+int main() {
+    int length = 6;
+    char a[length] = {'c', 'f', 'a', 'z', 'd', 'p'};
+    cout << "Urutan karakter sebelum sorting: " << endl;
+    print_array(a, length);
+    insertion_sort(a, length);
+    cout << "\nUrutan karakter setelah sorting: " << endl;
+    print_array(a, length);
 }

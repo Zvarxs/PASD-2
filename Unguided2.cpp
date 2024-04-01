@@ -1,36 +1,33 @@
 #include <iostream>
-#include <vector>
+#include <string>
+
+void bubbleSort(std::string arr[], int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (arr[j] > arr[j + 1]) {
+                std::swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
 
 int main() {
-    int size1, size2, size3;
+    const int n = 10;
+    std::string names[n] = {"siti", "situ", "sana", "ana", "ani", "caca", "cici", "dida", "dodo", "dadi"};
 
-    // Meminta pengguna untuk memasukkan ukuran elemen array tiga dimensi
-    std::cout << "Masukkan ukuran elemen array tiga dimensi (format: size1 size2 size3): ";
-    std::cin >> size1 >> size2 >> size3;
-
-    // Mendeklarasikan array tiga dimensi berdasarkan ukuran yang dimasukkan pengguna
-    std::vector<std::vector<std::vector<int>>> array3D(size1, std::vector<std::vector<int>>(size2, std::vector<int>(size3)));
-
-    // Meminta pengguna untuk memasukkan nilai-nilai array
-    std::cout << "Masukkan nilai-nilai array tiga dimensi:\n";
-    for (int i = 0; i < size1; ++i) {
-        for (int j = 0; j < size2; ++j) {
-            for (int k = 0; k < size3; ++k) {
-                std::cout << "Array[" << i << "][" << j << "][" << k << "]: ";
-                std::cin >> array3D[i][j][k];
-            }
-        }
+    std::cout << "Nama-nama sebelum diurutkan: ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << names[i] << " ";
     }
+    std::cout << std::endl;
 
-    // Menampilkan nilai-nilai array yang dimasukkan pengguna
-    std::cout << "Nilai-nilai array tiga dimensi yang dimasukkan:\n";
-    for (int i = 0; i < size1; ++i) {
-        for (int j = 0; j < size2; ++j) {
-            for (int k = 0; k < size3; ++k) {
-                std::cout << "Array[" << i << "][" << j << "][" << k << "]: " << array3D[i][j][k] << std::endl;
-            }
-        }
+    bubbleSort(names, n);
+
+    std::cout << "Nama-nama setelah diurutkan secara alfabet: ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << names[i] << " ";
     }
+    std::cout << std::endl;
 
     return 0;
 }

@@ -1,732 +1,429 @@
-# <h1 align="center">Laporan Praktikum Modul Array</h1>
+# <h1 align="center">Laporan Praktikum Modul Shorting</h1>
 <p align="center">Ananda Rizky</p>
 <p align="center">2311110019</p>
 
 ## Dasar Teori
 
-Array merupakan suatu tipe data yang berisi kumpulan nilai atau tipe data lain, misalnya seperti integer, string, number, boolean, floating dan lain-lain, selain itu Array juga digunakan untuk menampung banyak nilai dalam satu variabel. Berikut ini adalah beberapa jenis array : [1]
+### 1. Konsep Dasar Sorting
+sorting merupakan salah satu konsep yang sangat penting dalam dunia pemrograman komputer dan merupakan materi operasi yang paling banyak dipelajari dalam dunia komputer. Terdapat banyak bentuk algoritma telah dikembangkan dan ditingkatkan untuk membuat pengurutan lebih cepat baik untuk angka ataupun huruf. Semakin efisien suatu algoritma, maka saat dieksekusi dan dijalankan akan menghabiskan waktu yang
+lebih cepat dan bisa menerima lebih banyak masukan dari user. Secara umum ada 2 jenis
+pengurutan (sorting) data yaitu pengurutan naik (ascending), yaitu jika data disusun mulai dari nilai yang paling kecil hingga yang paling besar dan pengurutan turun (descending), yaitu jika data yang disusun mulai dari nilai yang paling besar hingga paling kecil. Algoritma pemrograman pengurutan sangat banyak dan bervariasi dari yang sederhana hingga yang kompleks. Karena materi pengurutan salah satu materi yang sangat banyak dipelajari sehingga
+banyak metode pengurutan yang ditemukan atau digunakan untuk melakukan pengurutan data diantaranya metode Insertion sort, Selection sort, Bubble Sort. [1]
 
-### 1. Array Satu Dimensi
+### 2. Insertion Sort
 
-Array satu dimensi yaitu kumpulan elemen-elemen identik yang hanya terdiri dari satu baris atau hanya satu kolom saja alamat penyimpanan data (indeks). Elemen-elemen tersebut memiliki tipe data yang sama, tetapi isi dari elemen tersebut boleh berbeda.[2]
+Menurut Munir (2011) menjelaskan
+bahwa Insertion Sort adalah metode
+pengurutan dengan cara menyisipkan
+elemen larik pada posisi yang tepat.
+Cara kerja algoritma ini adalah dengan
+mengambil elemen list satu-per-satu dan
+memasukkannya di posisi yang benar
+seperti namanya. Pada array, list yang baru
+dan elemen sisanya dapat berbagi tempat di
+array, meskipun cukup rumit. Untuk
+menghemat memori, implementasinya
+menggunakan pengurutan di tempat yang
+membandingkan elemen saat itu dengan
+elemen sebelumnya yang sudah diurut, lalu
+menukarnya terus sampai posisinya tepat.
+Hal ini terus dilakukan sampai tidak ada
+elemen tersisa di input (Tjaru, 2010).
 
-Contoh :
+Pseudocode Algoritma Insertion Sort:
+
+```
+for i = 1 to n-1
+set j = i
+set t = a[j]
+repeat while j > 0 and a[j-1] > t
+move a[j-1] to right
+end repeat
+set a[j] = t
+end for
+
+```
+
+Prosedur Insertion Sort dalam bahasa C++:
+
 ``` C++
-#include <iostream>
-
-int main() {
-    const int SIZE = 5; // Ukuran array
-    int arr[SIZE];      // Deklarasi array
-
-    // Memasukkan nilai-nilai ke dalam array
-    std::cout << "Masukkan " << SIZE << " angka:\n";
-    for (int i = 0; i < SIZE; ++i) {
-        std::cout << "Angka ke-" << (i+1) << ": ";
-        std::cin >> arr[i];
-    }
-
-    // Mencetak nilai-nilai array
-    std::cout << "\nNilai-nilai yang dimasukkan:\n";
-    for (int i = 0; i < SIZE; ++i) {
-        std::cout << "Angka ke-" << (i+1) << ": " << arr[i] << std::endl;
-    }
-
-    return 0;
+void insertion_sort(int arr[], int length) {
+int i, j ,tmp;
+for (i = 1; i < length; i++) {
+ j = i;
+while (j > 0 && arr[j - 1] > arr[j]) {
+ tmp = arr[j];
+ arr[j] = arr[j - 1];
+ arr[j - 1] = tmp;
+ j--;
+ }//end of while loop
+}//end of for loop
 }
 ```
-Output :
+
+**Contoh**
+
+Diketahui array suatu integer terdiri dari 6 elemen sebagai berikut; {22, 10, 15, 3, 8, 2}. Contoh program untuk mengurutkan ke-6 elemen tersebut adalah sebagai berikut:
+
 ```
-Masukkan 5 angka:
-Angka ke-1: 10
-Angka ke-2: 20
-Angka ke-3: 30
-Angka ke-4: 40
-Angka ke-5: 50
-
-Nilai-nilai yang dimasukkan:
-Angka ke-1: 10
-Angka ke-2: 20
-Angka ke-3: 30
-Angka ke-4: 40
-Angka ke-5: 50
+#include <iostream>
+using namespace std;
+void insertion_sort(int arr[], int length) {
+ int i, j ,tmp;
+ for (i = 1; i < length; i++) {
+ j = i;
+ while (j > 0 && arr[j - 1] > arr[j]) {
+ tmp = arr[j];
+ arr[j] = arr[j - 1];
+ arr[j - 1] = tmp;
+ j--;
+ }//end of while loop
+ }//end of for loop
+}
+void print_array(int a[], int length) {
+ for(int i=0; i<length; i++) {
+ cout << a[i] << "\t";
+ }
+ cout << endl;
+}
+int main() {
+ int length = 6;
+ int a[length] = {22, 10, 15, 3, 8, 2};
+ insertion_sort(a, length);
+ print_array(a, length);
+}
 ```
-### 2. Array Dua Dimensi
 
-Array dua dimensi yang sering digambarkan sebagai sebuah matriks merupakan perluasan dari sebuah array satu dimensi. Jika array satu dimensi hanya terdiri dari sebuah baris dengan beberapa kolom elemen maka array dua dimensi terdiri dari beberapa baris dan beberapa kolom elemen yang bertipe sama. Pendeklarasian array dua dimensi hampir sama dengan pendeklarasian array satu dimensi, kecuali bahwa array dua dimensi terdapat dua jumlah elemen array yang terdapat di dalam kurung siku dan keduanya boleh tidak sama. [3]   
+### 3. Bubble Sort
 
-Contoh :
+Algoritma Bubble Sort adalah algoritma yang terinspirasi dari gelembung sabun yang
+berada pada permukaan air. Karena berat jenis gelembung sabun lebih ringan daripada berat jenis air, maka gelembung sabun akan terapung ke atas permukaan. Apabila kita menginginkan larik terurut naik, maka elemen larik yang paling kecil diapungkan ke atas melalui proses pertukaran atau bisa disebutkan bahwa arah perbandingan dilakukan dari belakang. [1] 
+
+Contoh prosedur Bubble Sort dalam bahasa C++ :
+
 ``` C++
-#include <iostream>
+void bubble_sort(int arr[], int length){
+ bool not_sorted = true;
+ int j=0,tmp;
 
-int main() {
-    const int ROWS = 3;    // Jumlah baris
-    const int COLS = 3;    // Jumlah kolom
-    int arr[ROWS][COLS];   // Deklarasi array
-
-    // Memasukkan nilai-nilai ke dalam array
-    std::cout << "Masukkan " << ROWS * COLS << " angka:\n";
-    for (int i
-```
-Output :
-```
-Masukkan 9 angka:
-Array[0][0]: 1
-Array[0][1]: 2
-Array[0][2]: 3
-Array[1][0]: 4
-Array[1][1]: 5
-Array[1][2]: 6
-Array[2][0]: 7
-Array[2][1]: 8
-Array[2][2]: 9
-
-Nilai-nilai yang dimasukkan:
-Array[0][0]: 1
-Array[0][1]: 2
-Array[0][2]: 3
-Array[1][0]: 4
-Array[1][1]: 5
-Array[1][2]: 6
-Array[2][0]: 7
-Array[2][1]: 8
-Array[2][2]: 9
+ while (not_sorted){
+    not_sorted = false;
+    j++;
+    for (int i = 0; i < length - j; i++){
+        if (arr[i] > arr[i + 1]) {
+            tmp = arr[i];
+            arr[i] = arr[i + 1];
+            arr[i + 1] = tmp;
+            not_sorted = true;
+        }//end of if
+    }//end of for loop
+    }//end of while loop
+}//end of bubble_sort
 ```
 
-### 3. Array Multidimensi
+### 3. Selection Sort
 
-Array ini seperti array dimensi dua tetapi dapat memiliki ukuran yang lebih besar. Sebenarnya array dimensi banyak ini tidak terlalu sering digunakan, tetapi sewaktu-waktu kalau dimensi yang dibutuhkan banyak, maka array ini sangat memegang peranan yang penting.[4]
+Menurut Munir (2011), Selection sort
+adalah suatu metode pengurutan yang
+memilih elemen maksimum/minimum dari
+larik, lalu menempatkan elemen
+maksimum/minimum itu pada awal atau
+akhir larik (elemen terujung).
+Konsep proses selection sort adalah
+mencari (memilih) nilai terkecil dan
+menukarnya dengan elemen paling awal
+(paling kiri) pada setiap tahap. Proses Sort dilakukan tahap per tahap. Untuk n = 7
+maka akan dilakukan (n – 1) = 6 tahap
+(Yahya, 2014). [2]
 
-Contoh :
-``` c++
-#include <iostream>
+Contoh prosedur Selection Sort:
 
-int main() {
-    const int SIZE1 = 2;    // Jumlah elemen dimensi pertama
-    const int SIZE2 = 3;    // Jumlah elemen dimensi kedua
-    const int SIZE3 = 4;    // Jumlah elemen dimensi ketiga
-    int arr[SIZE1][SIZE2][SIZE3];   // Deklarasi array tiga dimensi
-
-    // Memasukkan nilai-nilai ke dalam array
-    std::cout << "Masukkan " << SIZE1 * SIZE2 * SIZE3 << " angka:\n";
-    for (int i = 0; i < SIZE1; ++i) {
-        for (int j = 0; j < SIZE2; ++j) {
-            for (int k = 0; k < SIZE3; ++k) {
-                std::cout << "Array[" << i << "][" << j << "][" << k << "]: ";
-                std::cin >> arr[i][j][k];
-            }
-        }
-    }
-
-    // Mencetak nilai-nilai array
-    std::cout << "\nNilai-nilai yang dimasukkan:\n";
-    for (int i = 0; i < SIZE1; ++i) {
-        for (int j = 0; j < SIZE2; ++j) {
-            for (int k = 0; k < SIZE3; ++k) {
-                std::cout << "Array[" << i << "][" << j << "][" << k << "]: " << arr[i][j][k] << std::endl;
-            }
-        }
-    }
-
-    return 0;
+```
+void selectSort(int arr[], int n) {
+ int pos_min,temp;
+for (int i=0; i < n-1; i++) {
+ pos_min = i;
+for (int j=i+1; j < n; j++) {
+ if (arr[j] < arr[pos_min])
+ pos_min=j;
+}
+ if (pos_min != i) {
+ temp = arr[i];
+ arr[i] = arr[pos_min];
+ arr[pos_min] = temp;
+ }
+}
 }
 ```
-Output :
-```
-Masukkan 24 angka:
-Array[0][0][0]: 1
-Array[0][0][1]: 2
-Array[0][0][2]: 3
-Array[0][0][3]: 4
-Array[0][1][0]: 5
-Array[0][1][1]: 6
-Array[0][1][2]: 7
-Array[0][1][3]: 8
-Array[0][2][0]: 9
-Array[0][2][1]: 10
-Array[0][2][2]: 11
-Array[0][2][3]: 12
-Array[1][0][0]: 13
-Array[1][0][1]: 14
-Array[1][0][2]: 15
-Array[1][0][3]: 16
-Array[1][1][0]: 17
-Array[1][1][1]: 18
-Array[1][1][2]: 19
-Array[1][1][3]: 20
-Array[1][2][0]: 21
-Array[1][2][1]: 22
-Array[1][2][2]: 23
-Array[1][2][3]: 24
 
-Nilai-nilai yang dimasukkan:
-Array[0][0][0]: 1
-Array[0][0][1]: 2
-Array[0][0][2]: 3
-Array[0][0][3]: 4
-Array[0][1][0]: 5
-Array[0][1][1]: 6
-Array[0][1][2]: 7
-Array[0][1][3]: 8
-Array[0][2][0]: 9
-Array[0][2][1]: 10
-Array[0][2][2]: 11
-Array[0][2][3]: 12
-Array[1][0][0]: 13
-Array[1][0][1]: 14
-Array[1][0][2]: 15
-Array[1][0][3]: 16
-Array[1][1][0]: 17
-Array[1][1][1]: 18
-Array[1][1][2]: 19
-Array[1][1][3]: 20
-Array[1][2][0]: 21
-Array[1][2][1]: 22
-Array[1][2][2]: 23
-Array[1][2][3]: 24
-```
-### 4. Array Empat Dimensi
-
-Four dimensioned array is a collection of such packs of cards, each pack having the same number of cards, each card with the same number of rows, and each row having the same number of columns. [5]
-
-Contoh :
-```c++
-#include <iostream>
-
-int main() {
-    const int SIZE1 = 2;    // Jumlah elemen dimensi pertama
-    const int SIZE2 = 2;    // Jumlah elemen dimensi kedua
-    const int SIZE3 = 2;    // Jumlah elemen dimensi ketiga
-    const int SIZE4 = 3;    // Jumlah elemen dimensi keempat
-    int arr[SIZE1][SIZE2][SIZE3][SIZE4];   // Deklarasi array empat dimensi
-
-    // Memasukkan nilai-nilai ke dalam array
-    std::cout << "Masukkan " << SIZE1 * SIZE2 * SIZE3 * SIZE4 << " angka:\n";
-    for (int i = 0; i < SIZE1; ++i) {
-        for (int j = 0; j < SIZE2; ++j) {
-            for (int k = 0; k < SIZE3; ++k) {
-                for (int l = 0; l < SIZE4; ++l) {
-                    std::cout << "Array[" << i << "][" << j << "][" << k << "][" << l << "]: ";
-                    std::cin >> arr[i][j][k][l];
-                }
-            }
-        }
-    }
-
-    // Mencetak nilai-nilai array
-    std::cout << "\nNilai-nilai yang dimasukkan:\n";
-    for (int i = 0; i < SIZE1; ++i) {
-        for (int j = 0; j < SIZE2; ++j) {
-            for (int k = 0; k < SIZE3; ++k) {
-                for (int l = 0; l < SIZE4; ++l) {
-                    std::cout << "Array[" << i << "][" << j << "][" << k << "][" << l << "]: " << arr[i][j][k][l] << std::endl;
-                }
-            }
-        }
-    }
-
-    return 0;
-}
-```
-Output :
-```
-Masukkan 24 angka:
-Array[0][0][0][0]: 1
-Array[0][0][0][1]: 2
-Array[0][0][0][2]: 3
-Array[0][0][1][0]: 4
-Array[0][0][1][1]: 5
-Array[0][0][1][2]: 6
-Array[0][1][0][0]: 7
-Array[0][1][0][1]: 8
-Array[0][1][0][2]: 9
-Array[0][1][1][0]: 10
-Array[0][1][1][1]: 11
-Array[0][1][1][2]: 12
-Array[1][0][0][0]: 13
-Array[1][0][0][1]: 14
-Array[1][0][0][2]: 15
-Array[1][0][1][0]: 16
-Array[1][0][1][1]: 17
-Array[1][0][1][2]: 18
-Array[1][1][0][0]: 19
-Array[1][1][0][1]: 20
-Array[1][1][0][2]: 21
-Array[1][1][1][0]: 22
-Array[1][1][1][1]: 23
-Array[1][1][1][2]: 24
-
-Nilai-nilai yang dimasukkan:
-Array[0][0][0][0]: 1
-Array[0][0][0][1]: 2
-Array[0][0][0][2]: 3
-Array[0][0][1][0]: 4
-Array[0][0][1][1]: 5
-Array[0][0][1][2]: 6
-Array[0][1][0][0]: 7
-Array[0][1][0][1]: 8
-Array[0][1][0][2]: 9
-Array[0][1][1][0]: 10
-Array[0][1][1][1]: 11
-Array[0][1][1][2]: 12
-Array[1][0][0][0]: 13
-Array[1][0][0][1]: 14
-Array[1][0][0][2]: 15
-Array[1][0][1][0]: 16
-Array[1][0][1][1]: 17
-Array[1][0][1][2]: 18
-Array[1][1][0][0]: 19
-Array[1][1][0][1]: 20
-Array[1][1][0][2]: 21
-Array[1][1][1][0]: 22
-Array[1][1][1][1]: 23
-Array[1][1][1][2]: 24
-```
-### 5. Array Lima Dimensi
-
-Array lima dimensi adalah struktur data yang dapat menyimpan elemen-elemen dalam lima dimensi. Ini berarti array tersebut memiliki lima tingkat dimensi yang masing-masing dapat diindeks untuk mengakses elemen. 
-
-Contoh :
-``` C++
-#include <iostream>
-
-int main() {
-    const int SIZE1 = 2;    // Jumlah elemen dimensi pertama
-    const int SIZE2 = 2;    // Jumlah elemen dimensi kedua
-    const int SIZE3 = 2;    // Jumlah elemen dimensi ketiga
-    const int SIZE4 = 2;    // Jumlah elemen dimensi keempat
-    const int SIZE5 = 3;    // Jumlah elemen dimensi kelima
-    int arr[SIZE1][SIZE2][SIZE3][SIZE4][SIZE5];   // Deklarasi array lima dimensi
-
-    // Memasukkan nilai-nilai ke dalam array
-    std::cout << "Masukkan " << SIZE1 * SIZE2 * SIZE3 * SIZE4 * SIZE5 << " angka:\n";
-    for (int i = 0; i < SIZE1; ++i) {
-        for (int j = 0; j < SIZE2; ++j) {
-            for (int k = 0; k < SIZE3; ++k) {
-                for (int l = 0; l < SIZE4; ++l) {
-                    for (int m = 0; m < SIZE5; ++m) {
-                        std::cout << "Array[" << i << "][" << j << "][" << k << "][" << l << "][" << m << "]: ";
-                        std::cin >> arr[i][j][k][l][m];
-                    }
-                }
-            }
-        }
-    }
-
-    // Mencetak nilai-nilai array
-    std::cout << "\nNilai-nilai yang dimasukkan:\n";
-    for (int i = 0; i < SIZE1; ++i) {
-        for (int j = 0; j < SIZE2; ++j) {
-            for (int k = 0; k < SIZE3; ++k) {
-                for (int l = 0; l < SIZE4; ++l) {
-                    for (int m = 0; m < SIZE5; ++m) {
-                        std::cout << "Array[" << i << "][" << j << "][" << k << "][" << l << "][" << m << "]: " << arr[i][j][k][l][m] << std::endl;
-                    }
-                }
-            }
-        }
-    }
-
-    return 0;
-}
-```
-Output :
-```
-Masukkan 48 angka :
-Array[0][0][0][0][0]: 1
-Array[0][0][0][0][1]: 2
-Array[0][0][0][0][2]: 3
-Array[0][0][0][1][0]: 4
-Array[0][0][0][1][1]: 5
-Array[0][0][0][1][2]: 6
-Array[0][0][1][0][0]: 7
-Array[0][0][1][0][1]: 8
-Array[0][0][1][0][2]: 9
-Array[0][0][1][1][0]: 10
-Array[0][0][1][1][1]: 11
-Array[0][0][1][1][2]: 12
-Array[0][1][0][0][0]: 13
-Array[0][1][0][0][1]: 14
-Array[0][1][0][0][2]: 15
-Array[0][1][0][1][0]: 16
-Array[0][1][0][1][1]: 17
-Array[0][1][0][1][2]: 18
-Array[0][1][1][0][0]: 19
-Array[0][1][1][0][1]: 20
-Array[0][1][1][0][2]: 21
-Array[0][1][1][1][0]: 22
-Array[0][1][1][1][1]: 23
-Array[0][1][1][1][2]: 24
-Array[1][0][0][0][0]: 25
-Array[1][0][0][0][1]: 26
-Array[1][0][0][0][2]: 27
-Array[1][0][0][1][0]: 28
-Array[1][0][0][1][1]: 29
-Array[1][0][0][1][2]: 30
-Array[1][0][1][0][0]: 31
-Array[1][0][1][0][1]: 32
-Array[1][0][1][0][2]: 33
-Array[1][0][1][1][0]: 34
-Array[1][0][1][1][1]: 35
-Array[1][0][1][1][2]: 36
-Array[1][1][0][0][0]: 37
-Array[1][1][0][0][1]: 38
-Array[1][1][0][0][2]: 39
-Array[1][1][0][1][0]: 40
-Array[1][1][0][1][1]: 41
-Array[1][1][0][1][2]: 42
-Array[1][1][1][0][0]: 43
-Array[1][1][1][0][1]: 44
-Array[1][1][1][0][2]: 45
-Array[1][1][1][1][0]: 46
-Array[1][1][1][1][1]: 47
-Array[1][1][1][1][2]: 48
-
-Nilai-nilai yang dimasukkan :
-Array[0][0][0][0][0]: 1
-Array[0][0][0][0][1]: 2
-Array[0][0][0][0][2]: 3
-Array[0][0][0][1][0]: 4
-Array[0][0][0][1][1]: 5
-Array[0][0][0][1][2]: 6
-Array[0][0][1][0][0]: 7
-Array[0][0][1][0][1]: 8
-Array[0][0][1][0][2]: 9
-Array[0][0][1][1][0]: 10
-Array[0][0][1][1][1]: 11
-Array[0][0][1][1][2]: 12
-Array[0][1][0][0][0]: 13
-Array[0][1][0][0][1]: 14
-Array[0][1][0][0][2]: 15
-Array[0][1][0][1][0]: 16
-Array[0][1][0][1][1]: 17
-Array[0][1][0][1][2]: 18
-Array[0][1][1][0][0]: 19
-Array[0][1][1][0][1]: 20
-Array[0][1][1][0][2]: 21
-Array[0][1][1][1][0]: 22
-Array[0][1][1][1][1]: 23
-Array[0][1][1][1][2]: 24
-Array[1][0][0][0][0]: 25
-Array[1][0][0][0][1]: 26
-Array[1][0][0][0][2]: 27
-Array[1][0][0][1][0]: 28
-Array[1][0][0][1][1]: 29
-Array[1][0][0][1][2]: 30
-Array[1][0][1][0][0]: 31
-Array[1][0][1][0][1]: 32
-Array[1][0][1][0][2]: 33
-Array[1][0][1][1][0]: 34
-Array[1][0][1][1][1]: 35
-Array[1][0][1][1][2]: 36
-Array[1][1][0][0][0]: 37
-Array[1][1][0][0][1]: 38
-Array[1][1][0][0][2]: 39
-Array[1][1][0][1][0]: 40
-Array[1][1][0][1][1]: 41
-Array[1][1][0][1][2]: 42
-Array[1][1][1][0][0]: 43
-Array[1][1][1][0][1]: 44
-Array[1][1][1][0][2]: 45
-Array[1][1][1][1][0]: 46
-Array[1][1][1][1][1]: 47
-Array[1][1][1][1][2]: 48
-```
 ## Guided 
 
-### 1. Program Input Array Tiga Dimensi
+### 1. Mengurutkan secara ascending untuk data numerik bertipe double menggunakan Algoritma Bubble Sort
+
 ``` C++
 #include <iostream>
 using namespace std;
-// PROGRAM INPUT ARRAY 3 DIMENSI
-int main()
-{
-// Deklarasi array
-int arr[2][3][3];
-// Input elemen
-for (int x = 0; x < 2; x++)
-{
-for (int y = 0; y < 3; y++)
-{
-for (int z = 0; z < 3; z++)
-{
-cout << "Input Array[" << x << "][" << y << "][" << z <<
-"] = ";
-cin >> arr[x][y][z];
+
+void bubble_sort(double arr[], int length){
+    bool not_sorted = true;
+    int j=0;
+    double tap;
+
+    while (not_sorted){
+        not_sorted = false;
+        j++;
+        for(int i = 0; i < length - j; j++){
+            if(arr[i] > arr[i + 1]){
+                tap = arr[i];
+                arr[i] = arr[i +1];
+                arr[i + 1] = tap;
+                not_sorted = true;
+            }// end off it 
+        }// end for loop
+        
+    }// end of while loop
+}// end of buble short 
+
+void print_array(double a[], int length) {
+
+    for(int i=0; i < length; i++){
+        cout << a[i] << "\t";
+    }
+    cout << endl;
 }
-}
-cout << endl;
-}
-// Output Array
-for (int x = 0; x < 2; x++)
-{
-for (int y = 0; y < 3; y++)
-{
-for (int z = 0; z < 3; z++)
-{
-cout << "Data Array[" << x << "][" << y << "][" << z <<
-"] = " << arr[x][y][z] << endl;
-}
-}
-}
-cout << endl;
-// Tampilan array
-for (int x = 0; x < 2; x++)
-{
-for (int y = 0; y < 3; y++)
-{
-for (int z = 0; z < 3; z++)
-{
-cout << arr[x][y][z] << ends;
-}
-cout << endl;
-}
-cout << endl;
-}
+int main(){
+    int length = 4;
+    double a[] = {15.7, 87.3, 7.5, 88.5, 67.9};
+    cout << "urutan bilangan sebelum sorting : " << endl;
+    print_array(a, length);
+    bubble_sort(a, length);
+    cout << "\n urutan bilangan setelah sortiing: " << endl;
+    print_array(a, length);
 }
 ```
-### Output :
-![Screenshot (57)](https://github.com/Zvarxs/PASD-2/assets/162097128/7f274397-ddcb-495d-8e77-1779333eb15c)
-![Screenshot (58)](https://github.com/Zvarxs/PASD-2/assets/162097128/fd532cf7-5e66-4c3d-9046-c3bfbfd3882a)
-![Screenshot (59)](https://github.com/Zvarxs/PASD-2/assets/162097128/ba3b8ba4-a9c0-4fb6-a75a-1f81f4144e9e)
 
-Program diatas menggambarkan cara kerja array tiga dimensi dan bagaimana mengakses serta menampilkan nilainya menggunakan loop bersarang untuk setiap dimensi.
+Kodingan di atas digunakan untuk menggambarkan cara kerja algoritma bubble sort secara ascending pada array bilangan pecahan dan mencetak hasilnya sebelum dan setelah pengurutan.
 
-### 2. Program Mencari Nilai Maksimal pada Array
+### 2. Mengurutkan karakter secara descending (dari terbesar hingga terkecil) menggunakan Algoritma Insertion Sort
+
 ``` C++
 #include <iostream>
 using namespace std;
-int main()
-{
-int maks, a, i = 1, lokasi;
-cout << "Masukkan panjang array: ";
-cin >> a;
-int array[a];
-cout << "Masukkan " << a << " angka\n";
-for (i = 0; i < a; i++)
-{
-cout << "Array ke-" << (i) << ": ";
-cin >> array[i];
-}
-maks = array[0];
-for (i = 0; i < a; i++)
-{
-if (array[i] > maks)
-{
-maks = array[i];
-lokasi = i;
-}
-}
-cout << "Nilai maksimum adalah " << maks << " berada di Array
-ke " << lokasi << endl;
-}
-```
-### Output :
-![Screenshot (60)](https://github.com/Zvarxs/PASD-2/assets/162097128/555ab860-c618-4af8-b480-90f3bc613b8d)
 
-program diatas menggambarkan bagaimana menggunakan array dan loop untuk mencari nilai maksimum dalam sebuah array yang diinputkan oleh pengguna.
+void insertion_sort(char arr[], int length) {
+    int i, j;
+    char tmp;
+    for (i = 1; i < length; i++) {
+        j = i;
+        while (j > 0 && arr[j - 1] < arr[j]) {
+            tmp = arr[j];
+            arr[j] = arr[j - 1];
+            arr[j - 1] = tmp;
+            j--;
+        } // end of while loop
+    } // end of for loop
+}
 
-## Unguided 
-
-### 1. Buatlah program untuk menampilkan Output seperti berikut dengan data yang diinputkan oleh user!
-``` C++
-#include <iostream>
-#include <vector>
+void print_array(char a[], int length) {
+    for (int i = 0; i < length; i++) {
+        cout << a[i] << "\t";
+    }
+    cout << endl;
+}
 
 int main() {
-    // Mendeklarasikan variabel dan vektor
-    int num;
-    std::vector<int> dataArray;
-    std::vector<int> evenNumbers;
-    std::vector<int> oddNumbers;
+    int length = 6;
+    char a[length] = {'c', 'f', 'a', 'z', 'd', 'p'};
+    cout << "Urutan karakter sebelum sorting: " << endl;
+    print_array(a, length);
+    insertion_sort(a, length);
+    cout << "\nUrutan karakter setelah sorting: " << endl;
+    print_array(a, length);
+}
+```
 
-    // Input data array dari pengguna
-    std::cout << "Masukkan 10 angka: ";
-    for (int i = 0; i < 10; ++i) {
-        std::cin >> num;
-        dataArray.push_back(num);
-    }
+ Kodingan diatas digunakan untuk menggambarkan cara kerja algoritma insertion sort secara descending pada array karakter dan mencetak hasilnya sebelum dan setelah pengurutan.
 
-    // Memisahkan angka genap dan ganjil
-    for (int i = 0; i < 10; ++i) {
-        if (dataArray[i] % 2 == 0) {
-            evenNumbers.push_back(dataArray[i]);
-        } else {
-            oddNumbers.push_back(dataArray[i]);
+## Unguided
+
+### 1. Kelas S1 IF 2016 G memiliki 5 mahasiswa. Pada akhir semester mereka menerima lembar Indeks Prestasi Semester (IPS), masing-masing mahasiswa tersebut memiliki IPS sebagai berikut: {3.8, 2.9, 3.3, 4.0, 2.4}. Buatlah program untuk mengurutkan IPS mahasiswa tersebut dari yang terbesar hingga terkecil dengan menggunakan algoritma Selection Sort!
+
+### Input
+
+```C++
+#include <iostream>
+
+void selectionSort(double arr[], int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        int max_idx = i;
+        for (int j = i + 1; j < n; ++j) {
+            if (arr[j] > arr[max_idx]) {
+                max_idx = j;
+            }
         }
+        std::swap(arr[i], arr[max_idx]);
     }
+}
 
-    // Menampilkan output
-    std::cout << "Data Array: ";
-    for (int i = 0; i < 10; ++i) {
-        std::cout << dataArray[i] << " ";
+int main() {
+    const int n = 5;
+    double ips[n] = {3.8, 2.9, 3.3, 4.0, 2.4};
+
+    std::cout << "IPS sebelum diurutkan: ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << ips[i] << " ";
     }
     std::cout << std::endl;
 
-    std::cout << "Nomor Genap: ";
-    for (int i = 0; i < evenNumbers.size(); ++i) {
-        std::cout << evenNumbers[i];
-        if (i != evenNumbers.size() - 1) {
-            std::cout << ", ";
-        }
-    }
-    std::cout << std::endl;
+    selectionSort(ips, n);
 
-    std::cout << "Nomor Ganjil: ";
-    for (int i = 0; i < oddNumbers.size(); ++i) {
-        std::cout << oddNumbers[i];
-        if (i != oddNumbers.size() - 1) {
-            std::cout << ", ";
-        }
+    std::cout << "IPS setelah diurutkan dari terbesar hingga terkecil: ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << ips[i] << " ";
     }
     std::cout << std::endl;
 
     return 0;
 }
 ```
-#### Output:
-![Screenshot (44)](https://github.com/Zvarxs/PASD-2/assets/162097128/880f2c8a-f728-4a02-b777-3e38e117dcf1)
+### Output
+![Screenshot (81)](https://github.com/Zvarxs/PASD-2/assets/162097128/d5703aad-bfde-4b98-8e0b-9d405bb10ccb)
 
-Kode di atas digunakan memasukkan 10 angka, memisahkan angka-angka genap dan ganjil, dan mencetak kembali hasilnya.
+#### Analisis Kompleksitas Waktu:
+ Terdapat dua loop
+ . Loop pertama berjalan sebanyak n-1 kali, sedangkan loop kedua berjalan sebanyak (n-1) + (n-2) + ... + 1 = (n-1) * n / 2 kali.
 
-#### Full code Screenshot:
-![Screenshot (41)](https://github.com/Zvarxs/PASD-2/assets/162097128/ece07d9e-3f59-4541-8271-647efcf85b4f)
-@![Screenshot (42)](https://github.com/Zvarxs/PASD-2/assets/162097128/4d45e09c-913e-44b6-8c40-38ae8387d332)
-![Screenshot (43)](https://github.com/Zvarxs/PASD-2/assets/162097128/1d9e23dd-9e93-44af-a866-087c62b4e207)
+Jadi, jumlah operasi komparasi yang dilakukan adalah sekitar n * (n-1) / 2. Dalam notasi Big O, kompleksitas waktu algoritma ini adalah O(n^2).
 
-### 2. Buatlah program Input array tiga dimensi (seperti pada guided) tetapi jumlah atau ukuran elemennya diinputkan oleh user!
-``` C++
+#### Analisis Kompleksitas Ruang:
+Kompleksitas ruangnya adalah O(1), yang berarti kompleksitas ruang konstan, dan ompleksitas waktu algoritma ini adalah O(n^2) dan kompleksitas ruangnya adalah O(1).
+
+### 2. Pak RT memiliki 10 warga dengan nama: siti, situ, sana, ana, ani, caca, cici, dida, dodo, dan dadi. Supaya mudah dalam melakukan pencarian, Pak RT akan mengurutkan namanama tersebut sesuai dengan alfabet. Buatlah program untuk membantu Pak RT dengan menggunakan algoritma Bubble Sort!
+
+### Input
+
+```C++
 #include <iostream>
-#include <vector>
+#include <string>
+
+void bubbleSort(std::string arr[], int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (arr[j] > arr[j + 1]) {
+                std::swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
 
 int main() {
-    int size1, size2, size3;
+    const int n = 10;
+    std::string names[n] = {"siti", "situ", "sana", "ana", "ani", "caca", "cici", "dida", "dodo", "dadi"};
 
-    // Meminta pengguna untuk memasukkan ukuran elemen array tiga dimensi
-    std::cout << "Masukkan ukuran elemen array tiga dimensi (format: size1 size2 size3): ";
-    std::cin >> size1 >> size2 >> size3;
-
-    // Mendeklarasikan array tiga dimensi berdasarkan ukuran yang dimasukkan pengguna
-    std::vector<std::vector<std::vector<int>>> array3D(size1, std::vector<std::vector<int>>(size2, std::vector<int>(size3)));
-
-    // Meminta pengguna untuk memasukkan nilai-nilai array
-    std::cout << "Masukkan nilai-nilai array tiga dimensi:\n";
-    for (int i = 0; i < size1; ++i) {
-        for (int j = 0; j < size2; ++j) {
-            for (int k = 0; k < size3; ++k) {
-                std::cout << "Array[" << i << "][" << j << "][" << k << "]: ";
-                std::cin >> array3D[i][j][k];
-            }
-        }
+    std::cout << "Nama-nama sebelum diurutkan: ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << names[i] << " ";
     }
+    std::cout << std::endl;
 
-    // Menampilkan nilai-nilai array yang dimasukkan pengguna
-    std::cout << "Nilai-nilai array tiga dimensi yang dimasukkan:\n";
-    for (int i = 0; i < size1; ++i) {
-        for (int j = 0; j < size2; ++j) {
-            for (int k = 0; k < size3; ++k) {
-                std::cout << "Array[" << i << "][" << j << "][" << k << "]: " << array3D[i][j][k] << std::endl;
-            }
-        }
+    bubbleSort(names, n);
+
+    std::cout << "Nama-nama setelah diurutkan secara alfabet: ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << names[i] << " ";
     }
+    std::cout << std::endl;
 
     return 0;
 }
 ```
-#### Output:
-![Screenshot (47)](https://github.com/Zvarxs/PASD-2/assets/162097128/143d4f10-9b6a-4757-8de3-b321d23d4408)
 
-Kode di atas digunakan untuk memasukkan ukuran elemen array tiga dimensi dan nilai-nilainya secara interaktif.
+### Output:
+![Screenshot (82)](https://github.com/Zvarxs/PASD-2/assets/162097128/a12965f4-bc7c-4a8f-a6c7-5945e01c232f)
 
-#### Full code Screenshot:
-![Screenshot (45)](https://github.com/Zvarxs/PASD-2/assets/162097128/aab8631d-7c9a-47b4-baee-c6c8dd4b392f)
-![Screenshot (46)](https://github.com/Zvarxs/PASD-2/assets/162097128/b271a6fa-c30e-4228-8336-135395affd2a)
+#### Analisis Kompleksitas Waktu:
+Terdapat dua loop bersarang. Loop pertama berjalan sebanyak n-1 kali, sedangkan loop kedua berjalan sebanyak (n-1) + (n-2) + ... + 1 = (n-1) * n / 2 kali.
 
-### 3. Buatlah program menu untuk mencari nilai Maksimum, Minimum dan Nilai rata – rata dari suatu array dengan input yang dimasukan oleh user!
-``` C++
+Jadi, jumlah operasi komparasi yang dilakukan adalah sekitar n * (n-1) / 2. Dalam notasi Big O, kompleksitas waktu algoritma ini adalah O(n^2).
+
+#### Analisis Kompleksitas Ruang:
+Kompleksitas ruangnya adalah O(1), yang berarti kompleksitas ruang konstan, dan kompleksitas waktu algoritma ini adalah O(n^2) dan kompleksitas ruangnya adalah O(1).
+
+### 3. Buatlah program yang meminta user menginputkan suatu bilangan n dan meminta user untuk menginputkan sejumlah n karakter. Kemudian program akan melakukan sorting secara menaik (ascending) dan menurun (descending)!
+
+### input
+
+```C++
 #include <iostream>
-#include <vector>
 #include <algorithm>
 
 int main() {
     int n;
-    std::cout << "Masukkan jumlah elemen array: ";
+    std::cout << "Masukkan jumlah karakter: ";
     std::cin >> n;
 
-    // Membuat vektor untuk menyimpan elemen-elemen array
-    std::vector<int> arr(n);
-
-    // Memasukkan elemen-elemen array dari pengguna
-    std::cout << "Masukkan " << n << " elemen array:\n";
+    char characters[n];
+    
+    std::cout << "Masukkan " << n << " karakter: ";
     for (int i = 0; i < n; ++i) {
-        std::cin >> arr[i];
+        std::cin >> characters[i];
     }
 
-    // Menampilkan menu
-    std::cout << "\nMenu:\n";
-    std::cout << "1. Cari nilai maksimum\n";
-    std::cout << "2. Cari nilai minimum\n";
-    std::cout << "3. Cari nilai rata-rata\n";
-    std::cout << "Pilih opsi (1/2/3): ";
-
-    int choice;
-    std::cin >> choice;
-
-    // Memproses opsi yang dipilih oleh pengguna
-    switch(choice) {
-        case 1:
-            // Mencari nilai maksimum menggunakan fungsi std::max_element
-            if (!arr.empty()) {
-                std::cout << "Nilai maksimum: " << *std::max_element(arr.begin(), arr.end()) << std::endl;
-            } else {
-                std::cout << "Array kosong\n";
-            }
-            break;
-        case 2:
-            // Mencari nilai minimum menggunakan fungsi std::min_element
-            if (!arr.empty()) {
-                std::cout << "Nilai minimum: " << *std::min_element(arr.begin(), arr.end()) << std::endl;
-            } else {
-                std::cout << "Array kosong\n";
-            }
-            break;
-        case 3:
-            // Menghitung nilai rata-rata
-            if (!arr.empty()) {
-                double sum = 0;
-                for (int i = 0; i < n; ++i) {
-                    sum += arr[i];
-                }
-                double average = sum / n;
-                std::cout << "Nilai rata-rata: " << average << std::endl;
-            } else {
-                std::cout << "Array kosong\n";
-            }
-            break;
-        default:
-            std::cout << "Pilihan tidak valid\n";
-            break;
+    // Output urutan karakter sebelum sorting
+    std::cout << "Urutan karakter sebelum sorting: ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << characters[i] << " ";
     }
+    std::cout << std::endl;
+
+    // Sorting naik (ascending)
+    std::sort(characters, characters + n);
+
+    std::cout << "Hasil sorting naik (ascending): ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << characters[i] << " ";
+    }
+    std::cout << std::endl;
+
+    // Sorting turun (descending)
+    std::sort(characters, characters + n, std::greater<char>());
+
+    std::cout << "Hasil sorting turun (descending): ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << characters[i] << " ";
+    }
+    std::cout << std::endl;
 
     return 0;
 }
 ```
-#### Output:
-![Screenshot (56)](https://github.com/Zvarxs/PASD-2/assets/162097128/47fe5200-3394-4a84-818d-9b19a91a1704)
 
-Kode di atas digunakan untuk menampilkan menu dengan tiga opsi: mencari nilai maksimum, minimum, atau nilai rata-rata dari array yang dimasukkan.
+### output
+![Screenshot (83)](https://github.com/Zvarxs/PASD-2/assets/162097128/69cdb34f-befc-49f8-a062-1f4bc87bedf0)
 
-#### Full code Screenshot:
-![Screenshot (51)](https://github.com/Zvarxs/PASD-2/assets/162097128/d83083f3-c098-4156-8961-407a1daea052)
-![Screenshot (52)](https://github.com/Zvarxs/PASD-2/assets/162097128/e4c688d5-5aed-45a2-88c1-8383adcff706)
-![Screenshot (54)](https://github.com/Zvarxs/PASD-2/assets/162097128/12bc42f4-7909-4f6d-b1ae-5162e07cd1aa)
-![Screenshot (55)](https://github.com/Zvarxs/PASD-2/assets/162097128/c4e29624-43ac-4e68-94be-40d788ea6e1a)
+Baik, berikut adalah analisis yang lebih rinci:
+
+#### Analisis Kompleksitas Waktu:
+
+1. **Input Karakter**:
+   - Kompleksitas waktu: O(n)
+   - Penjelasan: Program menerima input sejumlah `n` karakter dari pengguna. Iterasi dilakukan sebanyak `n` kali, di mana `n` adalah jumlah karakter yang dimasukkan.
+
+2. **Sorting Naik dan Turun**:
+   - Kompleksitas waktu: O(n log n)
+   - Penjelasan: Pengurutan dilakukan dua kali menggunakan fungsi `std::sort()`. Algoritma pengurutan yang digunakan biasanya adalah quick sort atau merge sort, yang memiliki kompleksitas waktu rata-rata O(n log n) dalam kasus terburuk.
+
+#### Analisis Kompleksitas Ruang:
+
+1. **Array Characters**:
+   - Kompleksitas ruang: O(n)
+   - Penjelasan: Array `characters` digunakan untuk menyimpan `n` karakter yang dimasukkan oleh pengguna. Oleh karena itu, ruang yang diperlukan untuk array ini adalah sebesar `n`.
+
+Kompleksitas waktu dan ruang tergantung pada jumlah karakter yang dimasukkan oleh pengguna, diwakili oleh `n`.
 
 ## Kesimpulan
-Pembelajaran modul Array ini memberikan landasan yang kuat dalam memahami konsep dasar array dan penerapannya dalam pemrograman C++, serta meningkatkan pemahaman tentang konsep pemrograman secara umum.
+Mempelajari algoritma sorting memberikan pemahaman mendalam tentang cara efisien menyusun dan mengurutkan data dalam sebuah program. Dengan pemahaman tersebut, pengembang dapat memilih algoritma yang tepat sesuai dengan kompleksitas waktu dan ruang yang dibutuhkan untuk menyelesaikan tugas tertentu. Selain itu, penggunaan algoritma sorting membantu meningkatkan kinerja aplikasi dan mengoptimalkan penggunaan sumber daya komputasi, yang merupakan aspek krusial dalam pengembangan perangkat lunak modern.
 
 ## Referensi
-[1] Suryana, T. (2022). Array Dalam C++.
-[2] lestari, K. (2019, March 29). STUKTUR DATA STATIS ARRAY.
-[3] Pratama, M. A. (2020). STRUKTUR DATA ARRAY DUA DIMENSI PADA PEMROGRAMAN C++.
-[4] lestari, Komang. “STUKTUR DATA STATIS ARRAY.” OSF Preprints, 29 Mar. 2019. Web.
-[5] https://www.quora.com/What-is-a-4-dimensional-array 
+[1] Arifin, R. W., & Setiyadi, D. (2020). Algoritma Metode Pengurutan Bubble Sort dan Quick Sort Dalam Bahasa Pemrograman C++. INFORMATION SYSTEM FOR EDUCATORS AND PROFESSIONALS: Journal of Information System, 4(2), 178-â.
+[2] Maulana, R. (2016). Analisa Perbandingan Kompleksitas Algoritma Selectionsort Dan Insertionsort. Jurnal Informatika, 3(2).

@@ -1,4 +1,4 @@
-# <h1 align="center">Laporan Praktikum Modul Sraching</h1>
+# <h1 align="center">Laporan Praktikum Modul Searching</h1>
 <p align="center">Ananda Rizky</p>
 <p align="center">2311110019</p>
 
